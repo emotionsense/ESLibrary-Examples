@@ -19,16 +19,26 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 package com.ubhave.example.sensordatamanager;
 
-import com.ubhave.datahandler.config.DataTransferConfig;
-import com.ubhave.sensormanager.sensors.SensorUtils;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.ubhave.datahandler.config.DataTransferConfig;
+import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
+import com.ubhave.example.sensordatamanager.log.ExampleImmediateTransferLogger;
+import com.ubhave.example.sensordatamanager.log.ExampleStoreOnlyLogger;
+import com.ubhave.sensormanager.sensors.SensorUtils;
+
 public class MainActivity extends Activity
 {
+	private final static int[] DATA_TRANSFER_POLICIES = new int[]{
+		DataTransferConfig.STORE_ONLY,
+		DataTransferConfig.TRANSFER_IMMEDIATE,
+		DataTransferConfig.TRANSFER_PERIODICALLY
+	};
+	private final static int CURRENT_POLICY = 1;
+	
 	private boolean isSensing;
 	private ExampleSensorListener sensor;
 
@@ -38,7 +48,14 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		isSensing = false;
-		sensor = new ExampleSensorListener(this, DataTransferConfig.STORE_ONLY, SensorUtils.SENSOR_TYPE_LOCATION);
+		
+		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY];
+		AbstractDataLogger dataLogger = getDataLoggerForPolicy(currentPolicy);
+		
+		if (dataLogger != null)
+		{
+			sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_ACCELEROMETER);
+		}
 	}
 	
 	@Override
@@ -48,6 +65,23 @@ public class MainActivity extends Activity
 		if (isSensing)
 		{
 			sensor.stopSensing();
+		}
+	}
+	
+	private AbstractDataLogger getDataLoggerForPolicy(int currentPolicy)
+	{
+		if (currentPolicy == DataTransferConfig.STORE_ONLY)
+		{
+			return new ExampleStoreOnlyLogger(this);
+		}
+		else if (currentPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
+		{
+			return new ExampleImmediateTransferLogger(this);
+		}
+		else
+		{
+			System.err.println("No logger defined for policy: "+currentPolicy);
+			return null;
 		}
 	}
 
@@ -77,13 +111,20 @@ public class MainActivity extends Activity
 	
 	private boolean switchSensing()
 	{
-		if (isSensing)
+		if (sensor != null)
 		{
-			return sensor.startSensing();
+			if (isSensing)
+			{
+				return sensor.startSensing();
+			}
+			else
+			{
+				return sensor.stopSensing();
+			}
 		}
 		else
 		{
-			return sensor.stopSensing();
+			return false;
 		}
 	}
 }

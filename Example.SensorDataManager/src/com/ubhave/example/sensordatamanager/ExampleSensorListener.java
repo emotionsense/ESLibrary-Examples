@@ -21,9 +21,7 @@ package com.ubhave.example.sensordatamanager;
 
 import android.content.Context;
 
-import com.ubhave.datahandler.config.DataTransferConfig;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
-import com.ubhave.example.sensordatamanager.store.ExampleStoreOnlyLogger;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.SensorDataListener;
@@ -35,16 +33,13 @@ public class ExampleSensorListener implements SensorDataListener
 	private AbstractDataLogger dataLogger;
 	private int subscriptionId, sensorType;
 	
-	public ExampleSensorListener(final Context context, final int dataTransferPolicy, final int sensorType)
+	public ExampleSensorListener(final Context context, final AbstractDataLogger logger, final int sensorType)
 	{
 		this.sensorType = sensorType;
+		this.dataLogger = logger;
 		try
 		{
 			sensorManager = ESSensorManager.getSensorManager(context);
-			if (dataTransferPolicy == DataTransferConfig.STORE_ONLY)
-			{
-				dataLogger = new ExampleStoreOnlyLogger(context);
-			}
 		}
 		catch (ESException e)
 		{

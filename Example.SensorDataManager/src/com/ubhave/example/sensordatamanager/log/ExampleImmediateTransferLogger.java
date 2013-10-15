@@ -17,16 +17,17 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  ************************************************** */
 
-package com.ubhave.example.sensordatamanager.store;
+package com.ubhave.example.sensordatamanager.log;
 
 import android.content.Context;
 
-import com.ubhave.datahandler.loggertypes.AbstractStoreOnlyLogger;
+import com.ubhave.datahandler.loggertypes.AbstractImmediateTransferLogger;
+import com.ubhave.example.sensordatamanager.HiddenConstants;
 
-public class ExampleStoreOnlyLogger extends AbstractStoreOnlyLogger
+public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLogger
 {
 
-	public ExampleStoreOnlyLogger(Context context)
+	public ExampleImmediateTransferLogger(Context context)
 	{
 		super(context);
 	}
@@ -41,5 +42,17 @@ public class ExampleStoreOnlyLogger extends AbstractStoreOnlyLogger
 	protected String getUserId()
 	{
 		return "ExampleSensorDataManagerUser";
+	}
+
+	@Override
+	protected String getDataPostURL()
+	{
+		return HiddenConstants.YOUR_SERVERS_POST_URL;
+	}
+
+	@Override
+	protected String getPostPassword()
+	{
+		return HiddenConstants.YOUR_SERVERS_POST_PASSWORD_IF_ANY;
 	}
 }
