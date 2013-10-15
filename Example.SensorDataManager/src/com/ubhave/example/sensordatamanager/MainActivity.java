@@ -1,6 +1,7 @@
 package com.ubhave.example.sensordatamanager;
 
 import com.ubhave.datahandler.config.DataTransferConfig;
+import com.ubhave.sensormanager.sensors.SensorUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.widget.Button;
 public class MainActivity extends Activity
 {
 	private boolean isSensing;
-	private ExampleAccelerometerSensorListener sensor;
+	private ExampleSensorListener sensor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -18,7 +19,7 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		isSensing = false;
-		sensor = new ExampleAccelerometerSensorListener(this, DataTransferConfig.STORE_ONLY);
+		sensor = new ExampleSensorListener(this, DataTransferConfig.STORE_ONLY, SensorUtils.SENSOR_TYPE_LOCATION);
 	}
 	
 	@Override
