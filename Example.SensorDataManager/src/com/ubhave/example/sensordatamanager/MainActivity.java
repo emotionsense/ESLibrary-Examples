@@ -26,8 +26,10 @@ import android.widget.Button;
 
 import com.ubhave.datahandler.config.DataTransferConfig;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
+import com.ubhave.example.sensordatamanager.log.ExampleAsyncTransferLogger;
 import com.ubhave.example.sensordatamanager.log.ExampleImmediateTransferLogger;
 import com.ubhave.example.sensordatamanager.log.ExampleStoreOnlyLogger;
+import com.ubhave.sensormanager.config.sensors.pull.PullSensorConfig;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
 public class MainActivity extends Activity
@@ -37,7 +39,7 @@ public class MainActivity extends Activity
 		DataTransferConfig.TRANSFER_IMMEDIATE,
 		DataTransferConfig.TRANSFER_PERIODICALLY
 	};
-	private final static int CURRENT_POLICY = 1;
+	private final static int CURRENT_POLICY_INDEX = 2;
 	
 	private boolean isSensing;
 	private ExampleSensorListener sensor;
@@ -49,12 +51,14 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 		isSensing = false;
 		
-		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY];
+		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY_INDEX];
 		AbstractDataLogger dataLogger = getDataLoggerForPolicy(currentPolicy);
 		
 		if (dataLogger != null)
 		{
 			sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_ACCELEROMETER);
+			sensor.setSensorConfig(PullSensorConfig.SENSE_WINDOW_LENGTH_MILLIS, 5000L);
+			sensor.setSensorConfig(PullSensorConfig.POST_SENSE_SLEEP_LENGTH_MILLIS, 10000L);
 		}
 	}
 	
@@ -77,6 +81,10 @@ public class MainActivity extends Activity
 		else if (currentPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
 		{
 			return new ExampleImmediateTransferLogger(this);
+		}
+		else if (currentPolicy == DataTransferConfig.TRANSFER_PERIODICALLY)
+		{
+			return new ExampleAsyncTransferLogger(this);
 		}
 		else
 		{

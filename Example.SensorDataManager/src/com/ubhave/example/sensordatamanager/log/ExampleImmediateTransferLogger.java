@@ -39,15 +39,16 @@ public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLog
 	}
 
 	@Override
-	protected String getUserId()
+	protected String getUniqueUserId()
 	{
+		// Should be unique to this user, not a static string
 		return "ExampleSensorDataManagerUser";
 	}
 
 	@Override
 	protected String getDataPostURL()
 	{
-		return HiddenConstants.YOUR_SERVERS_POST_URL;
+		return HiddenConstants.YOUR_SERVERS_DATA_POST_URL;
 	}
 
 	@Override

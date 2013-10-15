@@ -48,6 +48,21 @@ public class ExampleSensorListener implements SensorDataListener
 		}
 	}
 	
+	public void setSensorConfig(String key, Object value)
+	{
+		if (sensorManager != null)
+		{
+			try
+			{
+				sensorManager.setSensorConfig(sensorType, key, value);
+			}
+			catch (ESException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public boolean startSensing()
 	{
 		try

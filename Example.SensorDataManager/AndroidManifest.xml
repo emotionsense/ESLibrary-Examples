@@ -16,6 +16,9 @@
     
     <!-- Required to post data remotely (policy: transfer immediate/transfer periodically) -->
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Required to transfer data periodically -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
