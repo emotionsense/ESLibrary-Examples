@@ -1,0 +1,59 @@
+<resources>
+
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">ES2 Demo App</string>
+    
+    <string name="app_name">ES2 Demo</string>
+    <string name="instructions">Select a sensor from those available below.</string>
+    <string name="pull_sensor">Pull Sensors</string>
+    <string name="push_sensor">Push Sensors</string>
+    <string name="statusTitle">Current Status:</string>
+    <string name="dataPushTitle">Sensed Data:</string>
+    <string name="dataPullTitle">Latest Sensed Data:</string>
+    <string name="dataTime">(Data Time)</string>
+    
+    <string name="sampling">Sampling</string>
+    <string name="subscribed">Subscribed</string>
+    <string name="unsubscribed">Unsubscribed</string>
+    
+    <string name="startSensing">Start Sensing</string>
+    <string name="stopSensing">Stop Sensing</string>
+    <string name="pullData">Sample Once</string>
+    <string name="changeConfig">Change Sensor Configuration</string>
+    
+    
+    <string name="sampleTime">Sample Time:</string>
+    <string name="sleepTime">Sleep Time:</string>
+    <string name="done">Done</string>
+    
+    <string name="accelerometer">Samples the phone\'s acceleration.</string>
+    <string name="bluetooth">Scan for nearby Bluetooth devices.</string>
+    <string name="location">Get the latitude/longitude coordinates.</string>
+    <string name="microphone">Record an audio sample.</string>
+    <string name="wifi">Scan for Wi-Fi networks that are in range.</string>
+    
+    <string-array name="pull_sensors_descriptions">
+        <item>@string/accelerometer</item>
+        <item>@string/bluetooth</item>
+        <item>@string/location</item>
+        <item>@string/microphone</item>
+        <item>@string/wifi</item>
+    </string-array>
+    
+    <string name="battery">Battery level and charging status.</string>
+    <string name="phonestate">Whether the phone is ringing/in a call/etc.</string>
+    <string name="connectionstate">Monitors connection/disconnection events.</string>
+    <string name="proximity">Is an object close to the phone\'s screen?</string>
+    <string name="screen">Is the screen on/off?</string>
+    <string name="sms">Short messages received/sent.</string>
+    
+    <string-array name="push_sensors_descriptions">
+        <item>@string/battery</item>
+        <item>@string/connectionstate</item>
+        <item>@string/phonestate</item>
+        <item>@string/proximity</item>
+        <item>@string/screen</item>
+        <item>@string/sms</item>
+    </string-array>
+
+</resources>

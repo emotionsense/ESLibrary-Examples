@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">TriggerManager.Tester</string>
+    <string name="clock_title">Pick trigger time:</string>
+    <string name="startTrigger">Start Trigger</string>
+    <string name="stopTrigger">Stop Trigger</string>
+    
+    <string name="interval_prefix">Trigger every: </string>
+    <string name="interval_title">Trigger every: 2 minutes.</string>
+    
+    <string name="before_prefix">None before:</string>
+    <string name="minText">None before: 8:00</string>
+    
+    <string name="after_prefix">None after: </string>
+    <string name="maxText">None after: 22:00</string>
+    
+    <string name="num_prefix">Max: </string>
+    <string name="numText">Max: 2 notifications</string>
+    
+    <string name="min_interval_prefix">At least: </string>
+    <string name="min_interval_postfix">minutes apart.</string>
+    <string name="min_interval">At least: 2 minutes apart</string>
+    
+    <string name="allowed_prefix">Max daily: </string>
+    <string name="allowed_text">Max daily: 2</string>
+    <string name="reset_daily">Reset</string>
+    
+    <string name="clock">One off trigger by time of day</string>
+    <string name="interval">Regular trigger after given interval</string>
+    <string name="random">Random trigger up to a max per day</string>
+    
+    <string-array name="clock_trigger_descriptions">
+        <item>@string/clock</item>
+        <item>@string/interval</item>
+        <item>@string/random</item>
+    </string-array>
+    
+    <string name="accelerometer">Trigger when the user is moving</string>
+    <string name="microphone">Trigger when the mic senses speaking</string>
+    <string name="phone">Trigger after phone calls</string>
+    <string name="sms">Trigger after SMS are sent/received</string>
+    <string name="screen">Trigger when the screen is switched on/off</string>
+    
+    <string-array name="sensor_trigger_descriptions">
+        <item>@string/accelerometer</item>
+        <item>@string/microphone</item>
+        <item>@string/phone</item>
+        <item>@string/sms</item>
+        <item>@string/screen</item>
+    </string-array>
+    
+    <string name="cycleText">How long to sense for?</string>
+    <string name="cycleInit">2 seconds</string>
+    
+    <string name="sleepTitle">How long to wait for between sensing cycles?</string>
+    <string name="sleepInit">1 minute</string>
+    
+    <string name="delayTitle">Notification delay after sensing?</string>
+</resources>
