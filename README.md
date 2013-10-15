@@ -20,8 +20,8 @@ Download [here](http://www.cl.cam.ac.uk/~nkl25/publications/papers/lathia_mcss20
 
 License
 -------------------------------
- Copyright (c) 2012, University of Cambridge
- Neal Lathia, neal.lathia@cl.cam.ac.uk
+Copyright (c) 2012, University of Cambridge
+Neal Lathia, neal.lathia@cl.cam.ac.uk
 
 For more information, please visit http://www.emotionsense.org
 
