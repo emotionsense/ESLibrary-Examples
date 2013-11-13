@@ -1,0 +1,37 @@
+{
+	"sense_window_minutes":5,
+	"sensors":
+	[
+		{
+			"sensor_type":"Battery",
+			"sense_once":false
+		},
+		{
+			"sensor_type":"Screen",
+			"sense_once":false
+		},
+		{
+			"sensor_type":"SMSContentReader",
+			"sense_once":true
+		},
+		{
+			"sensor_type":"CallContentReader",
+			"sense_once":true
+		},
+		{
+			"sensor_type":"Microphone",
+			"sense_once":false,
+			"sensor_params":
+			[
+				{
+					"param_name":"SENSE_WINDOW_LENGTH_MILLIS",
+					"param_value":"10000"
+				},
+				{
+					"param_name":"POST_SENSE_SLEEP_LENGTH_MILLIS",
+					"param_value":"2000"
+				}
+			]
+		}
+	]
+}
