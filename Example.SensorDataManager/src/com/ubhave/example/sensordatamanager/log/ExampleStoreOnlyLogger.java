@@ -40,7 +40,18 @@ public class ExampleStoreOnlyLogger extends AbstractStoreOnlyLogger
 	@Override
 	protected String getUniqueUserId()
 	{
-		// Should be unique to this user, not a static string
+		/*
+		 * Note: Should be unique to this user, not a static string
+		 */
 		return "ExampleSensorDataManagerUser";
+	}
+
+	@Override
+	protected boolean shouldPrintLogMessages()
+	{
+		/*
+		 * Turn on/off Log.d messages
+		 */
+		return false;
 	}
 }

@@ -19,6 +19,8 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 package com.ubhave.example.sensordatamanager.log;
 
+import java.util.HashMap;
+
 import android.content.Context;
 
 import com.ubhave.datahandler.loggertypes.AbstractImmediateTransferLogger;
@@ -41,7 +43,9 @@ public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLog
 	@Override
 	protected String getUniqueUserId()
 	{
-		// Should be unique to this user, not a static string
+		/*
+		 * Note: Should be unique to this user, not a static string
+		 */
 		return "ExampleSensorDataManagerUser";
 	}
 
@@ -52,8 +56,35 @@ public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLog
 	}
 
 	@Override
-	protected String getPostPassword()
+	protected String getSuccessfulPostResponse()
 	{
-		return HiddenConstants.YOUR_SERVERS_POST_PASSWORD_IF_ANY;
+		return "Your Server's Response";
+	}
+
+	@Override
+	protected String getPostDataParamKey()
+	{
+		/*
+		 * POST key for the data being sent
+		 */
+		return null;
+	}
+
+	@Override
+	protected HashMap<String, String> getPostParameters()
+	{
+		/*
+		 * Parameters to be used when POST-ing data
+		 */
+		return null;
+	}
+
+	@Override
+	protected boolean shouldPrintLogMessages()
+	{
+		/*
+		 * Turn on/off Log.d messages
+		 */
+		return false;
 	}
 }
