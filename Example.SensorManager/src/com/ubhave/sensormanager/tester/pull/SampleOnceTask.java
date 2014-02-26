@@ -33,6 +33,7 @@ public class SampleOnceTask extends AsyncTask<Void, Void, SensorData>
 {
 	private final ESSensorManager sensorManager;
 	private final int sensorType;
+	protected String errorMessage;
 
 	public SampleOnceTask(int sensorType) throws ESException
 	{
@@ -51,6 +52,7 @@ public class SampleOnceTask extends AsyncTask<Void, Void, SensorData>
 		catch (ESException e)
 		{
 			e.printStackTrace();
+			errorMessage = e.getMessage();
 			return null;
 		}
 	}

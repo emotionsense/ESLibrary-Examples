@@ -6,34 +6,54 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
-    
+
+    <!-- PULL SENSOR PERMISSIONS -->
+
+    <!-- Application -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- Bluetooth -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- Call Content -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- Camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Microphone -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     
+    <!-- SMS Content -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    
+    <!-- WiFi -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     
+    <!-- PUSH SENSORS -->
+    
+    <!-- Battery -->
     <uses-permission android:name="android.permission.BATTERY_STATS" />
     
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- Connection State -->
+    <!-- Declared Above <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- Declared Above <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     
-    
+    <!-- Phone State -->
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    
+    <!-- SMS -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- Declared Above <uses-permission android:name="android.permission.READ_SMS" /> -->
+    
 
     <application
         android:name=".ApplicationContext"
@@ -49,10 +69,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".SensorListActivity" />
         <activity android:name=".pull.ConfigurablePullSensorExampleActivity" />
-        <activity android:name=".pull.NonConfigurablePullSensorExampleActivity"  />
+        <activity android:name=".pull.NonConfigurablePullSensorExampleActivity" />
         <activity android:name=".push.PushSensorExampleActivity" />
         <activity android:name=".pull.UpdateSensorConfigExampleActivity" />
     </application>

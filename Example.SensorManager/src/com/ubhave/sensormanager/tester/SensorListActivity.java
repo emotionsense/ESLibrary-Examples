@@ -46,11 +46,28 @@ public class SensorListActivity extends Activity
 	public final static boolean PULL_SENSOR_TYPE = true;
 	public final static boolean PUSH_SENSOR_TYPE = false;
 
-	private final static int[] pullSensors = new int[] { SensorUtils.SENSOR_TYPE_ACCELEROMETER, SensorUtils.SENSOR_TYPE_BLUETOOTH, SensorUtils.SENSOR_TYPE_LOCATION, SensorUtils.SENSOR_TYPE_MICROPHONE, SensorUtils.SENSOR_TYPE_WIFI };
-	private final static boolean[] isConfigurablePullSensor = new boolean[] {true, false, false, true, false };
-
-	private final static int[] pushSensors = new int[] { SensorUtils.SENSOR_TYPE_BATTERY, SensorUtils.SENSOR_TYPE_CONNECTION_STATE, SensorUtils.SENSOR_TYPE_PHONE_STATE, SensorUtils.SENSOR_TYPE_PROXIMITY, SensorUtils.SENSOR_TYPE_SCREEN,
-			SensorUtils.SENSOR_TYPE_SMS };
+	private final static int[] pullSensors = new int[] {
+		SensorUtils.SENSOR_TYPE_ACCELEROMETER,
+		SensorUtils.SENSOR_TYPE_BLUETOOTH,
+		SensorUtils.SENSOR_TYPE_LOCATION,
+		SensorUtils.SENSOR_TYPE_MICROPHONE,
+		SensorUtils.SENSOR_TYPE_WIFI,
+		SensorUtils.SENSOR_TYPE_CALL_CONTENT_READER,
+		SensorUtils.SENSOR_TYPE_SMS_CONTENT_READER,
+		SensorUtils.SENSOR_TYPE_APPLICATION,
+		SensorUtils.SENSOR_TYPE_CAMERA
+	};
+	
+	private final static int[] pushSensors = new int[] {
+		SensorUtils.SENSOR_TYPE_BATTERY,
+		SensorUtils.SENSOR_TYPE_CONNECTION_STATE,
+		SensorUtils.SENSOR_TYPE_PHONE_STATE,
+		SensorUtils.SENSOR_TYPE_PROXIMITY,
+		SensorUtils.SENSOR_TYPE_SCREEN,
+		SensorUtils.SENSOR_TYPE_SMS
+	};
+	
+	private final static boolean[] isConfigurablePullSensor = new boolean[] {true, false, false, true, false, false, false, false, false};
 
 	private final static String TITLE = "title";
 	private final static String DESCRIPTION = "description";

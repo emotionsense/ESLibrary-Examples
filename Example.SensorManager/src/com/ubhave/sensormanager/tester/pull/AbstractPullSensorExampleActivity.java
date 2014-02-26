@@ -129,7 +129,7 @@ public abstract class AbstractPullSensorExampleActivity extends ExampleAbstractA
 							JSONFormatter formatter = DataFormatter.getJSONFormatter(AbstractPullSensorExampleActivity.this, selectedSensorType);
 							updateUI(formatter.toJSON(data).toString());
 						}
-						else updateUI("Null (e.g., sensor off)");
+						else updateUI("Null (e.g., sensor off). Error message:\n"+errorMessage);
 						setSensorStatusField(UNSUBSCRIBED);
 					}
 

@@ -21,7 +21,6 @@
     <string name="pullData">Sample Once</string>
     <string name="changeConfig">Change Sensor Configuration</string>
     
-    
     <string name="sampleTime">Sample Time:</string>
     <string name="sleepTime">Sleep Time:</string>
     <string name="done">Done</string>
@@ -31,6 +30,10 @@
     <string name="location">Get the latitude/longitude coordinates.</string>
     <string name="microphone">Record an audio sample.</string>
     <string name="wifi">Scan for Wi-Fi networks that are in range.</string>
+    <string name="call_content">Query for the phone\'s call logs.</string>
+    <string name="sms_content">Query for the phone\'s SMS logs.</string>
+    <string name="apps">Query for current apps that are running.</string>
+    <string name="camera">Take a photo.</string>
     
     <string-array name="pull_sensors_descriptions">
         <item>@string/accelerometer</item>
@@ -38,6 +41,10 @@
         <item>@string/location</item>
         <item>@string/microphone</item>
         <item>@string/wifi</item>
+        <item>@string/call_content</item>
+        <item>@string/sms_content</item>
+        <item>@string/apps</item>
+        <item>@string/camera</item>
     </string-array>
     
     <string name="battery">Battery level and charging status.</string>
