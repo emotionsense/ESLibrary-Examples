@@ -1,4 +1,6 @@
-package com.ubhave.example.example.captureaudio;
+package com.ubhave.example.example.capturemedia;
+
+import com.ubhave.example.example.captureaudio.R;
 
 import android.app.Activity;
 import android.os.Bundle;
