@@ -20,13 +20,14 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 package com.ubhave.example.example.captureaudio;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
+import com.ubhave.datahandler.config.DataStorageConfig;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.SensorDataListener;
+import com.ubhave.sensormanager.config.sensors.pull.CameraConfig;
 import com.ubhave.sensormanager.config.sensors.pull.MicrophoneConfig;
 import com.ubhave.sensormanager.config.sensors.pull.PullSensorConfig;
 import com.ubhave.sensormanager.data.SensorData;
@@ -36,7 +37,7 @@ public class ExampleSensorListener implements SensorDataListener
 {
 	private ESSensorManager sensorManager;
 	private AbstractDataLogger dataLogger;
-	private int subscriptionId;
+	private int audioSubscriptionId, cameraSubscriptionId;
 	
 	public ExampleSensorListener(final Context context, final AbstractDataLogger logger)
 	{
@@ -59,14 +60,32 @@ public class ExampleSensorListener implements SensorDataListener
 		{
 			try
 			{
+				/*
+				 * Set microphone sensing params
+				 */
 				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, PullSensorConfig.SENSE_WINDOW_LENGTH_MILLIS, 2000L);
-				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, PullSensorConfig.POST_SENSE_SLEEP_LENGTH_MILLIS, 2000L);
-				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, MicrophoneConfig.KEEP_AUDIO_FILES, true);
+				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, PullSensorConfig.POST_SENSE_SLEEP_LENGTH_MILLIS, 5000L);
 				
-				String destinationDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ExampleSensorDataManager-AsyncData/Sounds";
-				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, MicrophoneConfig.AUDIO_FILES_DIRECTORY, destinationDirectory);
+				/*
+				 * Set camera 'sensing' params
+				 */
+				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_CAMERA, PullSensorConfig.POST_SENSE_SLEEP_LENGTH_MILLIS, 5000L);
+				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_CAMERA, CameraConfig.CAMERA_TYPE, CameraConfig.CAMERA_TYPE_FRONT);
+				
+				
+				String rootDirectory = (String) dataLogger.getDataManager().getConfig(DataStorageConfig.LOCAL_STORAGE_ROOT_DIRECTORY_NAME);
+				
+				/*
+				 * Store audio files to /Sounds
+				 */
+				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_MICROPHONE, MicrophoneConfig.AUDIO_FILES_DIRECTORY, rootDirectory + "/Sounds");
+				/*
+				 * Store image files to /Images
+				 */
+				sensorManager.setSensorConfig(SensorUtils.SENSOR_TYPE_CAMERA, CameraConfig.IMAGE_FILES_DIRECTORY, rootDirectory + "/Images");
+				
 			}
-			catch (ESException e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
@@ -77,7 +96,9 @@ public class ExampleSensorListener implements SensorDataListener
 	{
 		try
 		{
-			subscriptionId = sensorManager.subscribeToSensorData(SensorUtils.SENSOR_TYPE_MICROPHONE, this);
+			Log.d("ExampleApp", "Subscribing to sensors.");
+			audioSubscriptionId = sensorManager.subscribeToSensorData(SensorUtils.SENSOR_TYPE_MICROPHONE, this);
+			cameraSubscriptionId = sensorManager.subscribeToSensorData(SensorUtils.SENSOR_TYPE_CAMERA, this);
 			return true;
 		}
 		catch (Exception e)
@@ -91,7 +112,9 @@ public class ExampleSensorListener implements SensorDataListener
 	{
 		try
 		{
-			sensorManager.unsubscribeFromSensorData(subscriptionId);
+			Log.d("ExampleApp", "Unsubscribing from sensors.");
+			sensorManager.unsubscribeFromSensorData(audioSubscriptionId);
+			sensorManager.unsubscribeFromSensorData(cameraSubscriptionId);
 			return true;
 		}
 		catch (Exception e)
@@ -104,8 +127,15 @@ public class ExampleSensorListener implements SensorDataListener
 	@Override
 	public void onDataSensed(SensorData data)
 	{
-		Log.d("ExampleApp", "Data Received");
-		dataLogger.logSensorData(data);
+		try
+		{
+			Log.d("ExampleApp", "Data Received from: "+SensorUtils.getSensorName(data.getSensorType()));
+			dataLogger.logSensorData(data);
+		}
+		catch (ESException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

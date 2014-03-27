@@ -55,7 +55,7 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 	@Override
 	protected String getSuccessfulPostResponse()
 	{
-		return "Your Server's Response";
+		return HiddenConstants.YOUR_SERVERS_RESPONSE_ON_SUCCESSFUL_POST;
 	}
 
 	@Override
@@ -64,7 +64,9 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 		/*
 		 * Parameters to be used when POST-ing data
 		 */
-		return null;
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put(HiddenConstants.YOUR_POST_PARAM_KEY, HiddenConstants.YOUR_POST_PARAM_VALUE);
+		return params;
 	}
 
 	@Override
