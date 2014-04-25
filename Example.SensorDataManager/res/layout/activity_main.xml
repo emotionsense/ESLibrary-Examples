@@ -15,6 +15,7 @@
         android:text="@string/hello_world" />
     
     <Button
+        android:id="@+id/sensing_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

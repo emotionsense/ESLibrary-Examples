@@ -48,6 +48,15 @@ public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLog
 		 */
 		return "ExampleSensorDataManagerUser";
 	}
+	
+	@Override
+	protected String getDeviceId()
+	{
+		/*
+		 * Note: Should be unique to this device, not a static string
+		 */
+		return "ExampleSensorDataManagerDevice";
+	}
 
 	@Override
 	protected String getDataPostURL()
@@ -85,6 +94,6 @@ public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLog
 		/*
 		 * Turn on/off Log.d messages
 		 */
-		return false;
+		return true;
 	}
 }

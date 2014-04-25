@@ -53,6 +53,15 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 		 */
 		return "ExampleSensorDataManagerUser";
 	}
+	
+	@Override
+	protected String getDeviceId()
+	{
+		/*
+		 * Note: Should be unique to this device, not a static string
+		 */
+		return "ExampleSensorDataManagerDevice";
+	}
 
 	@Override
 	protected String getSuccessfulPostResponse()
@@ -75,7 +84,7 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 		/*
 		 * Turn on/off Log.d messages
 		 */
-		return false;
+		return true;
 	}
 
 }

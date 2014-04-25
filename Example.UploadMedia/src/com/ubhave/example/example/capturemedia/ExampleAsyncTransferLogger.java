@@ -42,6 +42,15 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 	{
 		return "ExampleSensorDataManager-AsyncData";
 	}
+	
+	@Override
+	protected String getDeviceId()
+	{
+		/*
+		 * Note: Should be unique to this device, not a static string
+		 */
+		return "ExampleSensorDataManagerDevice";
+	}
 
 	@Override
 	protected String getUniqueUserId()

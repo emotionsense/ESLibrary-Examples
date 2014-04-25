@@ -20,7 +20,9 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 package com.ubhave.example.sensordatamanager;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.ubhave.dataformatter.json.JSONFormatter;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
@@ -29,6 +31,7 @@ import com.ubhave.sensormanager.data.SensorData;
 
 public class ExampleSensorListener implements SensorDataListener
 {
+	private JSONFormatter formatter;
 	private ESSensorManager sensorManager;
 	private AbstractDataLogger dataLogger;
 	private int subscriptionId, sensorType;
@@ -40,6 +43,7 @@ public class ExampleSensorListener implements SensorDataListener
 		try
 		{
 			sensorManager = ESSensorManager.getSensorManager(context);
+			formatter = JSONFormatter.getJSONFormatter(context, sensorType);
 		}
 		catch (ESException e)
 		{
@@ -81,6 +85,7 @@ public class ExampleSensorListener implements SensorDataListener
 	{
 		try
 		{
+			Log.d("Sensor", "Unsubscribing id = "+subscriptionId);
 			sensorManager.unsubscribeFromSensorData(subscriptionId);
 			return true;
 		}
@@ -94,6 +99,7 @@ public class ExampleSensorListener implements SensorDataListener
 	@Override
 	public void onDataSensed(SensorData data)
 	{
+		Log.d("Data Sensed", formatter.toJSON(data).toString());
 		dataLogger.logSensorData(data);
 	}
 

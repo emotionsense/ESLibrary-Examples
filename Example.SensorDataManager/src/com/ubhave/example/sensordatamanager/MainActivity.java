@@ -29,17 +29,17 @@ import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
 import com.ubhave.example.sensordatamanager.log.ExampleAsyncTransferLogger;
 import com.ubhave.example.sensordatamanager.log.ExampleImmediateTransferLogger;
 import com.ubhave.example.sensordatamanager.log.ExampleStoreOnlyLogger;
-import com.ubhave.sensormanager.config.sensors.pull.PullSensorConfig;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
 public class MainActivity extends Activity
 {
-	private final static int[] DATA_TRANSFER_POLICIES = new int[]{
+	private final static int[] DATA_TRANSFER_POLICIES = new int[]
+	{
 		DataTransferConfig.STORE_ONLY,
 		DataTransferConfig.TRANSFER_IMMEDIATE,
 		DataTransferConfig.TRANSFER_PERIODICALLY
 	};
-	private final static int CURRENT_POLICY_INDEX = 2;
+	private final static int CURRENT_POLICY_INDEX = 0;
 	
 	private boolean isSensing;
 	private ExampleSensorListener sensor;
@@ -53,13 +53,7 @@ public class MainActivity extends Activity
 		
 		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY_INDEX];
 		AbstractDataLogger dataLogger = getDataLoggerForPolicy(currentPolicy);
-		
-		if (dataLogger != null)
-		{
-			sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_ACCELEROMETER);
-			sensor.setSensorConfig(PullSensorConfig.SENSE_WINDOW_LENGTH_MILLIS, 5000L);
-			sensor.setSensorConfig(PullSensorConfig.POST_SENSE_SLEEP_LENGTH_MILLIS, 10000L);
-		}
+		sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_ACCELEROMETER);
 	}
 	
 	@Override
@@ -68,7 +62,7 @@ public class MainActivity extends Activity
 		super.onPause();
 		if (isSensing)
 		{
-			sensor.stopSensing();
+			switchSensing((Button) findViewById(R.id.sensing_button));
 		}
 	}
 	
@@ -88,8 +82,7 @@ public class MainActivity extends Activity
 		}
 		else
 		{
-			System.err.println("No logger defined for policy: "+currentPolicy);
-			return null;
+			throw new NullPointerException("No logger defined for: "+currentPolicy);
 		}
 	}
 
