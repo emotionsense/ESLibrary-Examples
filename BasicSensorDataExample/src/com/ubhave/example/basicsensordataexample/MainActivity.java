@@ -24,7 +24,7 @@ public class MainActivity extends Activity
 		SensorUtils.SENSOR_TYPE_BATTERY,
 		SensorUtils.SENSOR_TYPE_BLUETOOTH,
 		SensorUtils.SENSOR_TYPE_CALL_CONTENT_READER,
-		SensorUtils.SENSOR_TYPE_CAMERA,
+//		SensorUtils.SENSOR_TYPE_CAMERA,
 		SensorUtils.SENSOR_TYPE_CONNECTION_STATE,
 		SensorUtils.SENSOR_TYPE_LOCATION,
 		SensorUtils.SENSOR_TYPE_MICROPHONE,
@@ -67,7 +67,7 @@ public class MainActivity extends Activity
 								SensorData data = esSensorManager.getDataFromSensor(sensorType);
 								JSONObject jsonData = dataFormatter.toJSON(data);
 								Log.d("Sensor Time Stamp", "" + jsonData.getString("senseStartTime"));
-//								Log.d("Sensor Data", "" + jsonData.toString());
+								Log.d("Sensor Data", "" + jsonData.toString());
 							}
 							catch (JSONException e)
 							{
