@@ -28,9 +28,6 @@ public class MainActivity extends Activity implements SensorDataListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-//		BatterySensor battery = new BatterySensor(this);
-//		battery.sense();
-		
 		try
 		{
 			sensorManager = ESSensorManager.getSensorManager(this);
