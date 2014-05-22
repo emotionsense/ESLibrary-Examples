@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DemoActivity" >
+
+    <TextView
+        android:id="@+id/status_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/start_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+        android:text="Status"
+        android:textSize="40dp" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="Start"
+        android:textSize="30dp" />
+
+</RelativeLayout>
