@@ -55,9 +55,9 @@ public class SenseFromAllPushSensorsTask extends AsyncTask<Void, Void, Void> imp
 				}
 			}
 			
-			Log.d(LOG_TAG, " === Waiting for 30 seconds ===");
+			Log.d(LOG_TAG, " === Waiting for 60 seconds ===");
 			long waited = 0;
-			while (waited < 30000L)
+			while (waited < 60000L)
 			{
 				try
 				{
@@ -85,6 +85,7 @@ public class SenseFromAllPushSensorsTask extends AsyncTask<Void, Void, Void> imp
 		try
 		{
 			int sensorType = data.getSensorType();
+			Log.d(LOG_TAG, "Received from: "+SensorUtils.getSensorName(sensorType));
 			JSONFormatter dataFormatter = DataFormatter.getJSONFormatter(context, sensorType);
 			JSONObject jsonData = dataFormatter.toJSON(data);
 			Log.d(LOG_TAG, "Sensor Time Stamp: " + jsonData.getString("senseStartTime"));

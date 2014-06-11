@@ -1,6 +1,5 @@
 package com.ubhave.example.basicsensordataexample;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -20,7 +19,7 @@ public class SenseFromAllPullSensorsTask extends AsyncTask<Void, Void, Void>
 	private final static String LOG_TAG = "SenseFromAllPullSensorsTask";
 	private final Context context;
 	private ESSensorManager sensorManager;
-	
+
 	public SenseFromAllPullSensorsTask(final Context context)
 	{
 		this.context = context;
@@ -38,38 +37,37 @@ public class SenseFromAllPullSensorsTask extends AsyncTask<Void, Void, Void>
 	@Override
 	protected Void doInBackground(Void... params)
 	{
-		try
+		Log.d("Sensor Data", " === Starting " + LOG_TAG + " ===");
+		for (int sensorType : SensorUtils.ALL_SENSORS)
 		{
-			Log.d("Sensor Data", " === Starting "+LOG_TAG+" ===");
-			for (int sensorType : SensorUtils.ALL_SENSORS)
+			if (SensorUtils.isPullSensor(sensorType))
 			{
-				if (SensorUtils.isPullSensor(sensorType))
+				try
 				{
-					try
+					Log.d(LOG_TAG, "Sensor type: " + SensorUtils.getSensorName(sensorType));
+					// Sense with default parameters
+					SensorData data = sensorManager.getDataFromSensor(sensorType);
+					if (data != null)
 					{
-						Log.d(LOG_TAG, "Sensor type: " + SensorUtils.getSensorName(sensorType));
-						
-						// Sense with default parameters
-						SensorData data = sensorManager.getDataFromSensor(sensorType);
-						
 						// Dump the result
 						JSONFormatter dataFormatter = DataFormatter.getJSONFormatter(context, sensorType);
 						JSONObject jsonData = dataFormatter.toJSON(data);
-						Log.d(LOG_TAG, "Sensor Time Stamp: " + jsonData.getString("senseStartTime"));
+						// Log.d(LOG_TAG, "Sensor Time Stamp: " +
+						// jsonData.getString("senseStartTime"));
 						Log.d(LOG_TAG, "Sensor Data: " + jsonData.toString());
 					}
-					catch (JSONException e)
+					else
 					{
-						e.printStackTrace();
+						Log.d(LOG_TAG, "Sensor Data is null.");
 					}
 				}
-			}	
-			Log.d("Sensor Data", " === Finished "+LOG_TAG+" ===");
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-		catch (ESException e)
-		{
-			e.printStackTrace();
-		}
+		Log.d("Sensor Data", " === Finished " + LOG_TAG + " ===");
 		return null;
 	}
 
