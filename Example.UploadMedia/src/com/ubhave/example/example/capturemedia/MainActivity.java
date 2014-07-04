@@ -24,8 +24,15 @@ public class MainActivity extends Activity
 		
 		isSensing = false;
 		
-		dataLogger = new ExampleAsyncTransferLogger(this);
-		sensorListener = new ExampleSensorListener(this, dataLogger);
+		try
+		{
+			dataLogger = new ExampleAsyncTransferLogger(this);
+			sensorListener = new ExampleSensorListener(this, dataLogger);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

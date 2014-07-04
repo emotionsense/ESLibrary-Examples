@@ -4,11 +4,13 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractAsyncTransferLogger;
+import com.ubhave.sensormanager.ESException;
 
 public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 {
-	public ExampleAsyncTransferLogger(Context context)
+	public ExampleAsyncTransferLogger(Context context) throws DataHandlerException, ESException
 	{
 		super(context);
 	}

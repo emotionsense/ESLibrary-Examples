@@ -21,12 +21,14 @@ package com.ubhave.example.sensordatamanager.log;
 
 import android.content.Context;
 
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractStoreOnlyLogger;
+import com.ubhave.sensormanager.ESException;
 
 public class ExampleStoreOnlyLogger extends AbstractStoreOnlyLogger
 {
 
-	public ExampleStoreOnlyLogger(Context context)
+	public ExampleStoreOnlyLogger(Context context) throws DataHandlerException, ESException
 	{
 		super(context);
 	}

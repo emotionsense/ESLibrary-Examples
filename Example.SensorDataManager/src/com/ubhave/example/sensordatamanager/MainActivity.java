@@ -68,21 +68,29 @@ public class MainActivity extends Activity
 	
 	private AbstractDataLogger getDataLoggerForPolicy(int currentPolicy)
 	{
-		if (currentPolicy == DataTransferConfig.STORE_ONLY)
+		try
 		{
-			return new ExampleStoreOnlyLogger(this);
+			if (currentPolicy == DataTransferConfig.STORE_ONLY)
+			{
+				return new ExampleStoreOnlyLogger(this);
+			}
+			else if (currentPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
+			{
+				return new ExampleImmediateTransferLogger(this);
+			}
+			else if (currentPolicy == DataTransferConfig.TRANSFER_PERIODICALLY)
+			{
+				return new ExampleAsyncTransferLogger(this);
+			}
+			else
+			{
+				throw new NullPointerException("No logger defined for: "+currentPolicy);
+			}
 		}
-		else if (currentPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
+		catch (Exception e)
 		{
-			return new ExampleImmediateTransferLogger(this);
-		}
-		else if (currentPolicy == DataTransferConfig.TRANSFER_PERIODICALLY)
-		{
-			return new ExampleAsyncTransferLogger(this);
-		}
-		else
-		{
-			throw new NullPointerException("No logger defined for: "+currentPolicy);
+			e.printStackTrace();
+			return null;
 		}
 	}
 

@@ -23,13 +23,15 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractImmediateTransferLogger;
 import com.ubhave.example.sensordatamanager.HiddenConstants;
+import com.ubhave.sensormanager.ESException;
 
 public class ExampleImmediateTransferLogger extends AbstractImmediateTransferLogger
 {
 
-	public ExampleImmediateTransferLogger(Context context)
+	public ExampleImmediateTransferLogger(Context context) throws DataHandlerException, ESException
 	{
 		super(context);
 	}
