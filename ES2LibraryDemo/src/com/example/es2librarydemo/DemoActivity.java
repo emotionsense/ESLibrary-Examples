@@ -42,6 +42,7 @@ public class DemoActivity extends Activity
 
 	private double captureSensorData()
 	{	
+		// Blank: you have to implement this!
 		return 0.0;
 	}
 
