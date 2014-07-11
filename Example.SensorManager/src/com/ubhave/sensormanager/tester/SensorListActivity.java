@@ -55,7 +55,6 @@ public class SensorListActivity extends Activity
 		SensorUtils.SENSOR_TYPE_CALL_CONTENT_READER,
 		SensorUtils.SENSOR_TYPE_SMS_CONTENT_READER,
 		SensorUtils.SENSOR_TYPE_APPLICATION,
-		SensorUtils.SENSOR_TYPE_CAMERA,
 		SensorUtils.SENSOR_TYPE_GYROSCOPE
 	};
 	

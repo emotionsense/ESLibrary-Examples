@@ -33,8 +33,8 @@
     <string name="call_content">Query for the phone\'s call logs.</string>
     <string name="sms_content">Query for the phone\'s SMS logs.</string>
     <string name="apps">Query for current apps that are running.</string>
-    <string name="camera">Take a photo.</string>
-    
+    <string name="gyro">Samples the phone\'s gyroscope</string>
+	
     <string-array name="pull_sensors_descriptions">
         <item>@string/accelerometer</item>
         <item>@string/bluetooth</item>
@@ -44,7 +44,7 @@
         <item>@string/call_content</item>
         <item>@string/sms_content</item>
         <item>@string/apps</item>
-        <item>@string/camera</item>
+        <item>@string/gyro</item>
     </string-array>
     
     <string name="battery">Battery level and charging status.</string>
