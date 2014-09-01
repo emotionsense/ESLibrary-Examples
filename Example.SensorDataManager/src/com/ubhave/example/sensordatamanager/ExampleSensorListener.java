@@ -23,6 +23,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ubhave.dataformatter.json.JSONFormatter;
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
@@ -99,7 +100,15 @@ public class ExampleSensorListener implements SensorDataListener
 	@Override
 	public void onDataSensed(SensorData data)
 	{
-		Log.d("Data Sensed", formatter.toJSON(data).toString());
+		try
+		{
+			Log.d("Data Sensed", formatter.toJSON(data).toString());
+		}
+		catch (DataHandlerException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		dataLogger.logSensorData(data);
 	}
 

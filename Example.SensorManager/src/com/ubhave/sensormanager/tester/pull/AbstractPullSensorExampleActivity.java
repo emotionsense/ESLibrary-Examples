@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.ubhave.dataformatter.DataFormatter;
 import com.ubhave.dataformatter.json.JSONFormatter;
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.data.SensorData;
 import com.ubhave.sensormanager.tester.ExampleAbstractActivity;
@@ -126,8 +127,16 @@ public abstract class AbstractPullSensorExampleActivity extends ExampleAbstractA
 					{
 						if (data != null)
 						{
-							JSONFormatter formatter = DataFormatter.getJSONFormatter(AbstractPullSensorExampleActivity.this, selectedSensorType);
-							updateUI(formatter.toJSON(data).toString());
+							try
+							{
+								JSONFormatter formatter = DataFormatter.getJSONFormatter(AbstractPullSensorExampleActivity.this, selectedSensorType);
+								updateUI(formatter.toJSON(data).toString());
+							}
+							catch (DataHandlerException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 						else updateUI("Null (e.g., sensor off). Error message:\n"+errorMessage);
 						setSensorStatusField(UNSUBSCRIBED);

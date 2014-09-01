@@ -53,7 +53,7 @@ public class MainActivity extends Activity
 		
 		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY_INDEX];
 		AbstractDataLogger dataLogger = getDataLoggerForPolicy(currentPolicy);
-		sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_ACCELEROMETER);
+		sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_SCREEN);
 	}
 	
 	@Override

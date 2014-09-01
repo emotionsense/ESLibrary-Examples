@@ -24,7 +24,7 @@ package com.ubhave.sensormanager.tester.pull;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.ESSensorManagerInterface;
-import com.ubhave.sensormanager.config.sensors.pull.PullSensorConfig;
+import com.ubhave.sensormanager.config.pull.PullSensorConfig;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 import com.ubhave.sensormanager.tester.ApplicationContext;
 

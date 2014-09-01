@@ -13,7 +13,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 		startPull();
 	}
-	
+
 	private void startPull()
 	{
 		new SenseFromAllPullSensorsTask(this)
@@ -22,11 +22,24 @@ public class MainActivity extends Activity
 			protected void onPostExecute(Void result)
 			{
 				super.onPostExecute(result);
+				startEnvironment();
+			}
+		}.execute();
+	}
+
+	private void startEnvironment()
+	{
+		new SenseFromAllEnvSensorsTask(this)
+		{
+			@Override
+			protected void onPostExecute(Void result)
+			{
+				super.onPostExecute(result);
 				startPush();
 			}
-		}.execute();	
+		}.execute();
 	}
-	
+
 	private void startPush()
 	{
 		new SenseFromAllPushSensorsTask(this).execute();

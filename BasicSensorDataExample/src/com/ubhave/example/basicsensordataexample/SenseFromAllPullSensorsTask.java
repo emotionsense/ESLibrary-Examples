@@ -1,28 +1,23 @@
 package com.ubhave.example.basicsensordataexample;
 
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ubhave.dataformatter.DataFormatter;
-import com.ubhave.dataformatter.json.JSONFormatter;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.config.GlobalConfig;
 import com.ubhave.sensormanager.data.SensorData;
+import com.ubhave.sensormanager.sensors.SensorEnum;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
 public class SenseFromAllPullSensorsTask extends AsyncTask<Void, Void, Void>
 {
 	private final static String LOG_TAG = "SenseFromAllPullSensorsTask";
-	private final Context context;
 	private ESSensorManager sensorManager;
 
 	public SenseFromAllPullSensorsTask(final Context context)
 	{
-		this.context = context;
 		try
 		{
 			sensorManager = ESSensorManager.getSensorManager(context);
@@ -38,28 +33,16 @@ public class SenseFromAllPullSensorsTask extends AsyncTask<Void, Void, Void>
 	protected Void doInBackground(Void... params)
 	{
 		Log.d("Sensor Data", " === Starting " + LOG_TAG + " ===");
-		for (int sensorType : SensorUtils.ALL_SENSORS)
+		for (SensorEnum s : SensorEnum.values())
 		{
-			if (SensorUtils.isPullSensor(sensorType))
+			if (s.isPull())
 			{
 				try
 				{
-					Log.d(LOG_TAG, "Sensor type: " + SensorUtils.getSensorName(sensorType));
 					// Sense with default parameters
-					SensorData data = sensorManager.getDataFromSensor(sensorType);
-					if (data != null)
-					{
-						// Dump the result
-						JSONFormatter dataFormatter = DataFormatter.getJSONFormatter(context, sensorType);
-						JSONObject jsonData = dataFormatter.toJSON(data);
-						// Log.d(LOG_TAG, "Sensor Time Stamp: " +
-						// jsonData.getString("senseStartTime"));
-						Log.d(LOG_TAG, "Sensor Data: " + jsonData.toString());
-					}
-					else
-					{
-						Log.d(LOG_TAG, "Sensor Data is null.");
-					}
+					SensorData data = sensorManager.getDataFromSensor(s.getType());
+					Log.d(LOG_TAG, "Sensed from: " + SensorUtils.getSensorName(data.getSensorType()));
+					// To store/format your data, check out the SensorDataManager library
 				}
 				catch (Exception e)
 				{

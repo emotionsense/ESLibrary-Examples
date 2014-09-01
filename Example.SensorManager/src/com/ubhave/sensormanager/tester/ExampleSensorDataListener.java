@@ -26,12 +26,13 @@ import android.util.Log;
 
 import com.ubhave.dataformatter.DataFormatter;
 import com.ubhave.dataformatter.json.JSONFormatter;
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.ESSensorManagerInterface;
 import com.ubhave.sensormanager.SensorDataListener;
 import com.ubhave.sensormanager.config.GlobalConfig;
-import com.ubhave.sensormanager.config.sensors.pull.LocationConfig;
+import com.ubhave.sensormanager.config.pull.LocationConfig;
 import com.ubhave.sensormanager.data.SensorData;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
@@ -103,7 +104,14 @@ public class ExampleSensorDataListener implements SensorDataListener
 	@Override
 	public void onDataSensed(SensorData data)
 	{
-		userInterface.updateUI(formatter.toJSON(data).toString());
+		try
+		{
+			userInterface.updateUI(formatter.toJSON(data).toString());
+		}
+		catch (DataHandlerException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public String getSensorName()

@@ -27,9 +27,9 @@ import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.SensorDataListener;
-import com.ubhave.sensormanager.config.sensors.pull.CameraConfig;
-import com.ubhave.sensormanager.config.sensors.pull.MicrophoneConfig;
-import com.ubhave.sensormanager.config.sensors.pull.PullSensorConfig;
+import com.ubhave.sensormanager.config.pull.CameraConfig;
+import com.ubhave.sensormanager.config.pull.MicrophoneConfig;
+import com.ubhave.sensormanager.config.pull.PullSensorConfig;
 import com.ubhave.sensormanager.data.SensorData;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
