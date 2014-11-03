@@ -26,6 +26,7 @@ Advanced library usage examples:
 
 Test apps created while updating the libraries:
 * [TestingAPI19Subscription](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/TestingAPI19Subscription). An example/test app that was developed when extending the libraries to deal with changes introduced in Android API 19.
+* [TestingLogQuery](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/TestingLogQuery). An example/test app that shows how to only sense for call/sms logs that are more recent than a pre-defined date.
 
 -------------------------------
 Copyright (c) 2013, Neal Lathia, neal.lathia@cl.cam.ac.uk
