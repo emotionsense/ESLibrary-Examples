@@ -13,14 +13,19 @@ Questions
 
 Contents
 -------------------------------
-* [BasicSensorDataExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/BasicSensorDataExample). Runs AsyncTasks that grab data from all the sensors, formats them as JSON, and prints the result to Log.d.
-* [ES2LibraryDemo](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/ES2LibraryDemo). Example/skeleton app used in the [Mobile and Sensor Systems](http://www.cl.cam.ac.uk/teaching/1314/MobSensSys/materials.html) course in the Computer Laboratory, University of Cambridge. 
-* [Example.SensorManager](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/Example.SensorManager). Simple/example app with tabs that lets you select a sensor and collect some data from it.
-* [Example.SensorDataManager](https://github.com/xsenselabs/ESLibrary-Examples/blob/master/Example.SensorDataManager). Has examples for the 3 different data manager policies that the Data Manager library supports (store only, transfer-immediate, transfer-async).
-* [Example.UploadMedia](https://github.com/xsenselabs/ESLibrary-Examples/blob/master/Example.UploadMedia). An example app that was developed for testing while extending the libraries to store/transfer media (e.g., audio) files.
-* [MultipleServiceSubscriptionExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/MultipleServiceSubscriptionExample). An example app where you have more than one Service that is sensing from the same sensor.
+Basic library usage examples:
+* [SensorManagerBasicExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensorManagerBasicExample). Runs AsyncTasks that grab data from all the sensors, formats them as JSON, and prints the result to Log.d.
+* [SensorManagerExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensorManagerExample). Simple/example app with tabs that lets you select a sensor and collect some data from it.
+* [SensorManagerLectureDemo](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensorManagerLectureDemo). Example/skeleton app used in the [Mobile and Sensor Systems](http://www.cl.cam.ac.uk/teaching/1314/MobSensSys/materials.html) course in the Computer Laboratory, University of Cambridge.
+* [SensorDataManagerExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensorDataManagerExample). Has examples for the 3 different data manager policies that the Data Manager library supports (store only, transfer-immediate, transfer-async).
+
+Advanced library usage examples:
 * [SensingWithAlarmsExample](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensingWithAlarmsExample). An example app that uses the Android Alarm Manager to sense on a 60 second interval.
-* [SubscribeAPI19](https://github.com/xsenselabs/ESLibrary-Examples/blob/master/SubscribeAPI19). An example/test app that was developed when extending the libraries to deal with changes introduced in Android API 19.
+* [SensingWithServiceSubscriptions](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensingWithServiceSubscriptionsExample). An example app where you have more than one Service that is sensing from the same sensor.
+* [SensingWithMediaCapture](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/SensingWithMediaCapture). An example app that was developed for testing while extending the libraries to store/transfer media (e.g., audio) files.
+
+Test apps created while updating the libraries:
+* [TestingAPI19Subscription](https://github.com/xsenselabs/ESLibrary-Examples/tree/master/TestingAPI19Subscription). An example/test app that was developed when extending the libraries to deal with changes introduced in Android API 19.
 
 -------------------------------
 Copyright (c) 2013, Neal Lathia, neal.lathia@cl.cam.ac.uk
