@@ -1,4 +1,4 @@
-package com.ubhave.example.sensordatamanager.log;
+package com.ubhave.example.sensordatamanager.loggers;
 
 import java.util.HashMap;
 
@@ -6,33 +6,31 @@ import android.content.Context;
 
 import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractAsyncTransferLogger;
-import com.ubhave.example.sensordatamanager.HiddenConstants;
 import com.ubhave.sensormanager.ESException;
 
 public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 {
-
-	public ExampleAsyncTransferLogger(Context context) throws DataHandlerException, ESException
+	public ExampleAsyncTransferLogger(final Context context, int storageType) throws DataHandlerException, ESException
 	{
-		super(context);
+		super(context, storageType);
 	}
 
 	@Override
-	protected long getFileLifeMillis()
+	protected long getDataLifeMillis()
 	{
 		/*
-		 *  Transfer any files that are more than 30 seconds old
+		 *  Transfer data that is more than 10 seconds old
 		 */
-		return (1000L * 30);
+		return (1000L * 10);
 	}
 
 	@Override
 	protected long getTransferAlarmLengthMillis()
 	{
 		/*
-		 *  Try to transfer data every 1 minutes
+		 *  Try to transfer data every 30 seconds
 		 */
-		return (1000L * 60 * 1);
+		return (1000L * 30);
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 	}
 
 	@Override
-	protected String getLocalStorageDirectoryName()
+	protected String getStorageName()
 	{
 		return "ExampleSensorDataManager-AsyncData";
 	}
@@ -68,7 +66,7 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 	@Override
 	protected String getSuccessfulPostResponse()
 	{
-		return "Your Server's Response";
+		return HiddenConstants.ON_SUCCESS_RESPONSE;
 	}
 
 	@Override
@@ -77,7 +75,9 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 		/*
 		 * Parameters to be used when POST-ing data
 		 */
-		return null;
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put(HiddenConstants.KEY_API_KEY, HiddenConstants.KEY_API_VALUE);
+		return params;
 	}
 
 	@Override
@@ -88,5 +88,4 @@ public class ExampleAsyncTransferLogger extends AbstractAsyncTransferLogger
 		 */
 		return true;
 	}
-
 }

@@ -106,7 +106,6 @@ public class ExampleSensorListener implements SensorDataListener
 		}
 		catch (DataHandlerException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dataLogger.logSensorData(data);

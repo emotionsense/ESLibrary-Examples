@@ -21,28 +21,59 @@ package com.ubhave.example.sensordatamanager;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ubhave.datahandler.config.DataStorageConfig;
 import com.ubhave.datahandler.config.DataTransferConfig;
+import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.datahandler.loggertypes.AbstractDataLogger;
-import com.ubhave.example.sensordatamanager.log.ExampleAsyncTransferLogger;
-import com.ubhave.example.sensordatamanager.log.ExampleImmediateTransferLogger;
-import com.ubhave.example.sensordatamanager.log.ExampleStoreOnlyLogger;
+import com.ubhave.example.sensordatamanager.loggers.ExampleAsyncTransferLogger;
+import com.ubhave.example.sensordatamanager.loggers.ExampleImmediateTransferLogger;
+import com.ubhave.example.sensordatamanager.loggers.ExampleStoreOnlyLogger;
+import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.sensors.SensorUtils;
 
 public class MainActivity extends Activity
 {
+	/*
+	 * The library supports three transfer policies:
+	 * None - data is stored locally
+	 * Immediate - the device tries to send the data immediately
+	 * Periodically - the device is stored and bulk transferred
+	 */
 	private final static int[] DATA_TRANSFER_POLICIES = new int[]
 	{
 		DataTransferConfig.STORE_ONLY,
 		DataTransferConfig.TRANSFER_IMMEDIATE,
 		DataTransferConfig.TRANSFER_PERIODICALLY
 	};
-	private final static int CURRENT_POLICY_INDEX = 0;
+	
+	/*
+	 * The library supports three storage policies:
+	 * None - data is stored locally
+	 * Immediate - the device tries to send the data immediately
+	 * Periodically - the device is stored and bulk transferred
+	 */
+	private final static int[] DATA_STORAGE_POLICIES = new int[]
+	{
+		DataStorageConfig.STORAGE_TYPE_NONE,
+		DataStorageConfig.STORAGE_TYPE_FILES,
+		DataStorageConfig.STORAGE_TYPE_DB
+	};
+	
+	/*
+	 * Index of the values used in this example
+	 * Change these to try different storage/transfer combinations
+	 */
+	private final static int TRANSFER_POLICY_INDEX = 2;
+	private final static int STORAGE_POLICY_INDEX = 2;
+	private final static int SENSOR = SensorUtils.SENSOR_TYPE_PROXIMITY;
 	
 	private boolean isSensing;
 	private ExampleSensorListener sensor;
+	private AbstractDataLogger dataLogger;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -51,9 +82,11 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 		isSensing = false;
 		
-		int currentPolicy = DATA_TRANSFER_POLICIES[CURRENT_POLICY_INDEX];
-		AbstractDataLogger dataLogger = getDataLoggerForPolicy(currentPolicy);
-		sensor = new ExampleSensorListener(this, dataLogger, SensorUtils.SENSOR_TYPE_SCREEN);
+		int transferPolicy = DATA_TRANSFER_POLICIES[TRANSFER_POLICY_INDEX];
+		int storagePolicy = DATA_STORAGE_POLICIES[STORAGE_POLICY_INDEX];
+		Log.d("ESDataManager", "Transfer = "+transferPolicy+", Storage = "+storagePolicy);
+		dataLogger = getDataLoggerForPolicy(transferPolicy, storagePolicy);
+		sensor = new ExampleSensorListener(this, dataLogger, SENSOR);
 	}
 	
 	@Override
@@ -66,29 +99,36 @@ public class MainActivity extends Activity
 		}
 	}
 	
-	private AbstractDataLogger getDataLoggerForPolicy(int currentPolicy)
+	private AbstractDataLogger getDataLoggerForPolicy(int transferPolicy, int storagePolicy)
 	{
 		try
 		{
-			if (currentPolicy == DataTransferConfig.STORE_ONLY)
+			if (transferPolicy == DataTransferConfig.STORE_ONLY)
 			{
-				return new ExampleStoreOnlyLogger(this);
+				return new ExampleStoreOnlyLogger(this, storagePolicy);
 			}
-			else if (currentPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
+			else if (transferPolicy == DataTransferConfig.TRANSFER_IMMEDIATE)
 			{
-				return new ExampleImmediateTransferLogger(this);
+				return new ExampleImmediateTransferLogger(this, storagePolicy);
 			}
-			else if (currentPolicy == DataTransferConfig.TRANSFER_PERIODICALLY)
+			else if (transferPolicy == DataTransferConfig.TRANSFER_PERIODICALLY)
 			{
-				return new ExampleAsyncTransferLogger(this);
+				return new ExampleAsyncTransferLogger(this, storagePolicy);
 			}
 			else
 			{
-				throw new NullPointerException("No logger defined for: "+currentPolicy);
+				throw new NullPointerException("No logger defined for: "+transferPolicy);
 			}
 		}
-		catch (Exception e)
+		catch (ESException e)
 		{
+			Log.d("ESDataManager", "Return null / ESException");
+			e.printStackTrace();
+			return null;
+		}
+		catch (DataHandlerException e)
+		{
+			Log.d("ESDataManager", "Return null / DataHandlerException");
 			e.printStackTrace();
 			return null;
 		}
