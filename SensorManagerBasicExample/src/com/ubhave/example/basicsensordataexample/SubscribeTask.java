@@ -5,9 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.util.SparseIntArray;
 
-import com.ubhave.dataformatter.DataFormatter;
-import com.ubhave.dataformatter.json.JSONFormatter;
-import com.ubhave.datahandler.except.DataHandlerException;
 import com.ubhave.sensormanager.ESException;
 import com.ubhave.sensormanager.ESSensorManager;
 import com.ubhave.sensormanager.SensorDataListener;
@@ -101,17 +98,17 @@ public abstract class SubscribeTask extends AsyncTask<Void, Void, Void> implemen
 			Log.d(LOG_TAG, "Received from: " + SensorUtils.getSensorName(sensorType));
 			// To format/store your data, check out the SensorDataManager library
 			
-			JSONFormatter formatter = DataFormatter.getJSONFormatter(context, data.getSensorType());
-			Log.d(LOG_TAG, formatter.toJSON(data).toString());
+//			JSONFormatter formatter = DataFormatter.getJSONFormatter(context, data.getSensorType());
+//			Log.d(LOG_TAG, formatter.toJSON(data).toString());
 		}
 		catch (ESException e)
 		{
 			e.printStackTrace();
 		}
-		catch (DataHandlerException e)
-		{
-			e.printStackTrace();
-		}
+//		catch (DataHandlerException e)
+//		{
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
